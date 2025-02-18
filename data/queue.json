@@ -1,0 +1,41 @@
+{
+  "cashiers": [
+    {
+      "id": 1,
+      "name": "Cashier 1",
+      "currentNumber": 44,
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "name": "Cashier 2",
+      "currentNumber": 38,
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "name": "Cashier 3",
+      "currentNumber": 23,
+      "isActive": true
+    },
+    {
+      "id": 4,
+      "name": "Cashier 4",
+      "currentNumber": 49,
+      "isActive": true
+    },
+    {
+      "id": 5,
+      "name": "Cashier 5",
+      "currentNumber": 0,
+      "isActive": true
+    },
+    {
+      "id": 6,
+      "name": "Cashier 6",
+      "currentNumber": 43,
+      "isActive": true
+    }
+  ],
+  "currentTicket": 49
+}
