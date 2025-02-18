@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Cashier 1",
-      "currentNumber": 44,
+      "currentNumber": 76,
       "isActive": true
     },
     {
@@ -37,5 +37,5 @@
       "isActive": true
     }
   ],
-  "currentTicket": 49
+  "currentTicket": 76
 }
