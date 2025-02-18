@@ -1,10 +1,19 @@
 "use client";
-import React from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-const page = () => {
-  window.location.href = "/view";
+const Page = () => {
+  const router = useRouter();
 
-  return <></>;
+  useEffect(() => {
+    router.push('/view');
+  }, []);
+
+  return (
+    <div>
+      <span>REDIRECTING....</span>
+    </div>
+  );
 };
 
-export default page;
+export default Page;
