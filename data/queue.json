@@ -3,25 +3,25 @@
     {
       "id": 1,
       "name": "Cashier 1",
-      "currentNumber": 76,
+      "currentNumber": 4,
       "isActive": true
     },
     {
       "id": 2,
       "name": "Cashier 2",
-      "currentNumber": 38,
+      "currentNumber": 0,
       "isActive": true
     },
     {
       "id": 3,
       "name": "Cashier 3",
-      "currentNumber": 23,
+      "currentNumber": 3,
       "isActive": true
     },
     {
       "id": 4,
       "name": "Cashier 4",
-      "currentNumber": 49,
+      "currentNumber": 0,
       "isActive": true
     },
     {
@@ -33,9 +33,10 @@
     {
       "id": 6,
       "name": "Cashier 6",
-      "currentNumber": 43,
+      "currentNumber": 0,
       "isActive": true
     }
   ],
-  "currentTicket": 76
+  "currentTicket": 4,
+  "lastResetDate": "Wed Feb 19 2025"
 }
