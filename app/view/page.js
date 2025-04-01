@@ -6,13 +6,12 @@ import { User2, Volume2, VolumeX } from "lucide-react";
 export default function ViewPage() {
   const [queueData, setQueueData] = useState({ cashiers: [] });
   const [animatingIds, setAnimatingIds] = useState(new Set());
-  const [audioEnabled, setAudioEnabled] = useState(false);
+  const [audioEnabled, setAudioEnabled] = useState(true);
   const previousNumbersRef = useRef({});
   const audioPoolRef = useRef([]);
-  const audioPoolSize = 5; // Create 5 audio instances for rotation
+  const audioPoolSize = 5;
 
   useEffect(() => {
-    // Initialize audio pool
     audioPoolRef.current = Array(audioPoolSize)
       .fill()
       .map(() => {
@@ -37,13 +36,9 @@ export default function ViewPage() {
           previousNumber !== undefined &&
           cashier.currentNumber !== previousNumber
         ) {
-          // Play sound if enabled
           if (audioEnabled) {
-            // Use the next available audio element from the pool
             const audioElement =
               audioPoolRef.current[changeCount % audioPoolSize];
-
-            // Reset the audio element before playing to ensure it starts from the beginning
             audioElement.currentTime = 0;
 
             audioElement.play().catch((err) => {
@@ -71,10 +66,8 @@ export default function ViewPage() {
     return () => eventSource.close();
   }, [audioEnabled]);
 
-  // Function to toggle audio and initialize it with user interaction
   const toggleAudio = () => {
     if (!audioEnabled) {
-      // Try to play and immediately pause one audio instance to initialize audio with user gesture
       const initAudio = audioPoolRef.current[0];
       initAudio
         .play()
@@ -87,7 +80,6 @@ export default function ViewPage() {
           console.error("Error initializing audio:", err);
         });
     } else {
-      // Stop all currently playing sounds when turning off audio
       audioPoolRef.current.forEach((audio) => {
         audio.pause();
         audio.currentTime = 0;
