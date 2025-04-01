@@ -10,7 +10,7 @@ export default function ViewPage() {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    audioRef.current = new Audio("/notification_sound.mp3");
+    audioRef.current = new Audio("/notif.mp3");
     audioRef.current.volume = 1;
 
     queueData.cashiers.forEach((cashier) => {
@@ -64,54 +64,69 @@ export default function ViewPage() {
           </CardHeader>
           <CardContent className="flex-1 p-8 flex items-center">
             <div className="grid grid-cols-3 gap-8 w-full h-full">
-              {Array.from({ length: 9 }).map((_, index) => {
-                const cashier = queueData.cashiers[index];
-                if (!cashier || !cashier.isActive) {
+              {Array.from({ length: queueData.cashiers.length }).map(
+                (_, index) => {
+                  const cashier = queueData.cashiers[index];
+                  if (!cashier || !cashier.isActive) {
+                    return (
+                      <div
+                        key={cashier.id}
+                        className="relative overflow-hidden rounded-xl bg-white border border-gray-100 p-8 shadow-lg transition-all duration-300"
+                      >
+                        <div className="absolute top-0 right-0 w-24 h-24 bg-red-500 rotate-45 transform translate-x-12 -translate-y-12" />
+                        <div className="relative h-full flex flex-col justify-between">
+                          <div className="flex items-center space-x-4">
+                            <div className="p-3 bg-blue-100 rounded-xl">
+                              <User2 className="w-8 h-8 text-blue-600" />
+                            </div>
+                            <h2 className="text-3xl font-semibold text-gray-800">
+                              {cashier.name}
+                            </h2>
+                          </div>
+                          <div className="mt-4 text-center">
+                            <p className="text-8xl font-bold text-red-500 tracking-tight transition-all duration-300 transform scale-3d">
+                              Offline
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
                   return (
                     <div
-                      key={`empty-${index}`}
-                      className="rounded-xl bg-gray-50 border border-gray-100 p-8 flex items-center justify-center"
+                      key={cashier.id}
+                      className="relative overflow-hidden rounded-xl bg-white border border-gray-100 p-8 shadow-lg transition-all duration-300"
                     >
-                      <p className="text-2xl text-gray-400">
-                        Counter {index + 1}
-                      </p>
-                    </div>
-                  );
-                }
-                return (
-                  <div
-                    key={cashier.id}
-                    className="relative overflow-hidden rounded-xl bg-white border border-gray-100 p-8 shadow-lg transition-all duration-300"
-                  >
-                    <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500 rotate-45 transform translate-x-12 -translate-y-12" />
-                    <div className="relative h-full flex flex-col justify-between">
-                      <div className="flex items-center space-x-4">
-                        <div className="p-3 bg-blue-100 rounded-xl">
-                          <User2 className="w-8 h-8 text-blue-600" />
+                      <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500 rotate-45 transform translate-x-12 -translate-y-12" />
+                      <div className="relative h-full flex flex-col justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className="p-3 bg-blue-100 rounded-xl">
+                            <User2 className="w-8 h-8 text-blue-600" />
+                          </div>
+                          <h2 className="text-3xl font-semibold text-gray-800">
+                            {cashier.name}
+                          </h2>
                         </div>
-                        <h2 className="text-3xl font-semibold text-gray-800">
-                          {cashier.name}
-                        </h2>
-                      </div>
-                      <div className="mt-4 text-center">
-                        <p className="text-xl text-gray-500 mb-2">
-                          Current Number
-                        </p>
-                        <p
-                          className={`text-8xl font-bold text-blue-600 tracking-tight transition-all duration-300 transform
+                        <div className="mt-4 text-center">
+                          <p className="text-xl text-gray-500 mb-2">
+                            Now Serving:
+                          </p>
+                          <p
+                            className={`text-8xl font-bold text-blue-600 tracking-tight transition-all duration-300 transform
                             ${
                               animatingIds.has(cashier.id)
                                 ? "scale-125 text-green-600"
                                 : "scale-100"
                             }`}
-                        >
-                          {cashier.currentNumber}
-                        </p>
+                          >
+                            {cashier.currentNumber}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                }
+              )}
             </div>
           </CardContent>
         </Card>

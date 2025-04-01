@@ -15,7 +15,7 @@ export async function GET() {
 export async function POST(request) {
   try {
     const data = readData();
-    const { action, cashierId, name } = await request.json();
+    const { action, cashierId, name, isActive } = await request.json();
 
     if (action === "next") {
       data.currentTicket++;
@@ -31,6 +31,11 @@ export async function POST(request) {
         currentNumber: 0,
         isActive: true,
       });
+    } else if (action === "toggleActive") {
+      const cashier = data.cashiers.find((c) => c.id === cashierId);
+      if (cashier) {
+        cashier.isActive = isActive;
+      }
     }
 
     writeData(data);

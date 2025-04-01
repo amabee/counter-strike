@@ -2,41 +2,47 @@
   "cashiers": [
     {
       "id": 1,
-      "name": "Cashier 1",
-      "currentNumber": 4,
+      "name": "Window 1",
+      "currentNumber": 6,
       "isActive": true
     },
     {
       "id": 2,
-      "name": "Cashier 2",
-      "currentNumber": 0,
+      "name": "Window 2",
+      "currentNumber": 8,
       "isActive": true
     },
     {
       "id": 3,
-      "name": "Cashier 3",
-      "currentNumber": 3,
+      "name": "Window 3",
+      "currentNumber": 0,
       "isActive": true
     },
     {
       "id": 4,
-      "name": "Cashier 4",
+      "name": "Window 4",
       "currentNumber": 0,
       "isActive": true
     },
     {
       "id": 5,
-      "name": "Cashier 5",
+      "name": "Window 5",
       "currentNumber": 0,
       "isActive": true
     },
     {
       "id": 6,
-      "name": "Cashier 6",
+      "name": "Window 6",
       "currentNumber": 0,
+      "isActive": true
+    },
+    {
+      "id": 7,
+      "name": "Window 7",
+      "currentNumber": 12,
       "isActive": true
     }
   ],
-  "currentTicket": 4,
-  "lastResetDate": "Wed Feb 19 2025"
+  "currentTicket": 12,
+  "lastResetDate": "Tue Apr 01 2025"
 }
