@@ -1,5 +1,4 @@
 import { readData, writeData } from "@/lib/queueData";
-import { eventEmitter } from "@/lib/eventEmitter";
 
 export const dynamic = "force-dynamic";
 
@@ -25,10 +24,7 @@ export async function POST(request) {
         cashier.currentNumber = data.currentTicket;
       }
     } else if (action === "addCashier") {
-      const newId = data.cashiers.length > 0 
-        ? Math.max(...data.cashiers.map((c) => c.id)) + 1 
-        : 1;
-        
+      const newId = Math.max(...data.cashiers.map((c) => c.id)) + 1;
       data.cashiers.push({
         id: newId,
         name,
@@ -40,14 +36,9 @@ export async function POST(request) {
       if (cashier) {
         cashier.isActive = isActive;
       }
-    } else if (action === "removeCashier") {
-      data.cashiers = data.cashiers.filter((c) => c.id !== cashierId);
     }
 
     writeData(data);
- 
-    eventEmitter.emit("update", data);
-    
     return Response.json(data);
   } catch (error) {
     console.error("Error in POST handler:", error);

@@ -1,5 +1,24 @@
 {
-  "cashiers": [],
-  "currentTicket": 13,
+  "cashiers": [
+    {
+      "id": 1,
+      "name": "Window 1",
+      "currentNumber": 51,
+      "isActive": true
+    },
+    {
+      "id": 2,
+      "name": "Window 2",
+      "currentNumber": 52,
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "name": "Window 3",
+      "currentNumber": 48,
+      "isActive": true
+    }
+  ],
+  "currentTicket": 52,
   "lastResetDate": "Tue Apr 01 2025"
 }
