@@ -2,14 +2,15 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { User2, Loader2, AlertCircle, Power } from "lucide-react";
+import { User2, Loader2, AlertCircle, Power, RefreshCw } from "lucide-react";
 
-const AdminControlPanel = () => {
+const ControllerPanel = () => {
   const [cashiers, setCashiers] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [processingIds, setProcessingIds] = useState(new Set());
   const [togglingIds, setTogglingIds] = useState(new Set());
+  const [isResetting, setIsResetting] = useState(false);
 
   useEffect(() => {
     fetch("/api/queue")
@@ -111,6 +112,39 @@ const AdminControlPanel = () => {
     }
   };
 
+  const resetSystem = async () => {
+    if (
+      !confirm(
+        "Are you sure you want to reset all counters? This will set all windows back to zero."
+      )
+    ) {
+      return;
+    }
+
+    try {
+      setError(null);
+      setIsResetting(true);
+
+      const response = await fetch("/api/queue", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "reset" }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setCashiers(data.cashiers);
+    } catch (err) {
+      setError("Failed to reset queue system");
+      console.error(err);
+    } finally {
+      setIsResetting(false);
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center p-4">
@@ -129,9 +163,23 @@ const AdminControlPanel = () => {
           <h1 className="text-4xl font-bold text-gray-800 mb-4">
             Queue Management System
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-600 mb-4">
             Control all cashier windows from one place
           </p>
+          <Button
+            onClick={resetSystem}
+            variant="outline"
+            size="lg"
+            className="mb-6"
+            disabled={isResetting}
+          >
+            {isResetting ? (
+              <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+            ) : (
+              <RefreshCw className="w-5 h-5 mr-2" />
+            )}
+            Reset All Counters
+          </Button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -152,13 +200,18 @@ const AdminControlPanel = () => {
                     {cashier.isActive ? "Active" : "Inactive"}
                   </p>
                 </div>
+                <div className="text-sm text-gray-500">
+                  Range: {cashier.rangeStart} - {cashier.rangeEnd}
+                </div>
               </CardHeader>
               <CardContent className="p-6 space-y-6">
                 <div className="text-center space-y-4">
                   <div className="space-y-2">
                     <p className="text-lg text-gray-500">Now Serving</p>
                     <p className="text-5xl font-bold text-blue-600 tracking-tight">
-                      {cashier.currentNumber}
+                      {cashier.currentNumber > 0
+                        ? `${cashier.currentNumber}-${cashier.rangeEnd}`
+                        : "-"}
                     </p>
                   </div>
 
@@ -214,4 +267,4 @@ const AdminControlPanel = () => {
   );
 };
 
-export default AdminControlPanel;
+export default ControllerPanel;

@@ -3,22 +3,20 @@
     {
       "id": 1,
       "name": "Window 1",
-      "currentNumber": 51,
+      "currentNumber": 21,
+      "rangeStart": 21,
+      "rangeEnd": 25,
       "isActive": true
     },
     {
       "id": 2,
       "name": "Window 2",
-      "currentNumber": 52,
-      "isActive": true
-    },
-    {
-      "id": 3,
-      "name": "Window 3",
-      "currentNumber": 48,
+      "currentNumber": 26,
+      "rangeStart": 26,
+      "rangeEnd": 30,
       "isActive": true
     }
   ],
-  "currentTicket": 52,
-  "lastResetDate": "Tue Apr 01 2025"
+  "currentTicket": 30,
+  "lastResetDate": "Sun May 04 2025"
 }

@@ -88,15 +88,6 @@ export default function ViewPage() {
     }
   };
 
-  // Function to handle rapid sound notifications
-  const playNotificationSound = (index = 0) => {
-    if (!audioEnabled) return;
-
-    const audio = audioPoolRef.current[index % audioPoolSize];
-    audio.currentTime = 0;
-    return audio.play();
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       <div className="p-4 lg:p-8 h-screen flex flex-col">
@@ -185,7 +176,12 @@ export default function ViewPage() {
                                 : "scale-100"
                             }`}
                           >
-                            {cashier.currentNumber}
+                            {cashier.currentNumber > 0
+                              ? `${cashier.currentNumber}-${cashier.rangeEnd}`
+                              : "-"}
+                          </p>
+                          <p className="text-lg text-gray-500 mt-2">
+                            Current Set
                           </p>
                         </div>
                       </div>
